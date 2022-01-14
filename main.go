@@ -16,18 +16,19 @@ limitations under the License.
 package main
 
 import (
+	"os"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli/v2"
 	"github.com/xandout/soxy/client"
 	"github.com/xandout/soxy/server"
-	"os"
 )
 
 func main() {
 
 	app := &cli.App{
 		Name:  os.Args[0],
-		Usage: "fight the loneliness!",
+		Usage: "fight the loneliness!!",
 	}
 
 	app.Commands = []*cli.Command{
@@ -36,6 +37,7 @@ func main() {
 			Usage: "Start proxying traffic(server)",
 			Flags: []cli.Flag{
 				&cli.StringFlag{Name: "port", Aliases: []string{"p"}},
+				&cli.StringFlag{Name: "key", Aliases: []string{"k"}},
 			},
 			Action: server.Start,
 		},
@@ -46,6 +48,7 @@ func main() {
 				&cli.StringFlag{Name: "soxy-url", Aliases: []string{"U"}, Usage: "ws://soxy-daemon.com:8080"},
 				&cli.StringFlag{Name: "local", Aliases: []string{"L"}, Usage: "Which local port to listen on.\n\tExample: :3306 or 0.0.0.0:3306"},
 				&cli.StringFlag{Name: "remote", Aliases: []string{"R"}, Usage: "Where should the daemon proxy traffic to?\n\tExample: mysql-service:3306"},
+				&cli.StringFlag{Name: "key", Aliases: []string{"k"}, Usage: "The key to use for encrypt"},
 			},
 			Action: client.Start,
 		},
