@@ -142,6 +142,7 @@ OPTIONS:
                                Example: :3306 or 0.0.0.0:3306
    --remote value, -R value    Where should the daemon proxy traffic to?
                                Example: mysql-service:3306
+   --key value, -k value       Key for encryption 
    --help, -h                  show help (default: false)   
 
 
@@ -154,6 +155,7 @@ USAGE:
 
 OPTIONS:
    --port value, -p value  
+   --key value, -k value   Key for decryption
    --help, -h              show help (default: false)
 
 ```
