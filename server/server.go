@@ -3,6 +3,7 @@ package server
 import (
 	"crypto/sha256"
 	"crypto/tls"
+	"fmt"
 	"math"
 	"net"
 	"net/http"
@@ -39,6 +40,12 @@ func Start(c *cli.Context) error {
 }
 
 func (h *soHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("got panic", err)
+		}
+	}()
+
 	q := r.URL.Query()
 	var useTLS bool
 	if q.Get("useTLS") != "" {
